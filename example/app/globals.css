@@ -4,51 +4,57 @@
 
 @layer components {
   .button {
+    --btn-bg: theme('colors.slate.600');
+    --btn-hover: theme('colors.slate.500');
+    --btn-text: theme('colors.white');
+    @apply rounded-lg border-2 border-[color:var(--btn-bg)]  bg-[color:var(--btn-bg)] px-4 py-1.5 text-sm font-medium text-[color:var(--btn-text)] hover:bg-[color:var(--btn-hover)];
+  }
+  .button-primary {
     --btn-bg: theme('colors.violet.600');
     --btn-hover: theme('colors.violet.500');
     --btn-text: theme('colors.white');
-    @apply bg-[color:var(--btn-bg)] border-2 border-[color:var(--btn-bg)]  hover:bg-[color:var(--btn-hover)] text-[color:var(--btn-text)] font-medium text-sm rounded-lg px-4 py-2;
   }
-  .button-gray {
-    --btn-bg: theme('colors.gray.100');
-    --btn-hover: theme('colors.gray.200');
-    --btn-text: theme('colors.gray.600');
-  }
-  .button-outline{
-    --btn-bg: theme('colors.violet.500');
-    --btn-hover: theme('colors.violet.600');
-    @apply bg-transparent border-2 border-[color:var(--btn-bg)] hover:border-[color:var(--btn-hover)] text-[color:var(--btn-bg)] font-medium text-sm rounded-lg px-4 py-2;
+  .button-outline {
+    --btn-bg: theme('colors.slate.600');
+    --btn-hover: theme('colors.slate.700');
+    @apply rounded-lg border-2 border-[color:var(--btn-bg)] bg-transparent px-4 py-2 text-sm font-medium text-[color:var(--btn-bg)] hover:border-[color:var(--btn-hover)];
   }
 
-  .input{
-    @apply bg-white min-w-0 border border-gray-200 h-[36px] px-2.5 py-1 text-base md:text-sm rounded-lg focus:border-blue-500
+  .input {
+    @apply min-w-0 rounded-lg border border-gray-200 bg-white bg-white px-2.5 py-1 text-base text-slate-800 outline-none focus:border-blue-500 dark:bg-white/10
+    dark:text-white dark:focus:border-violet-500 md:text-sm;
+    &:not(textarea) {
+      @apply h-[36px];
+    }
+  }
+
+  .code {
+    @apply inline-block rounded bg-gray-200 px-1 shadow-inner dark:bg-white/20;
   }
 }
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground: rgb(0, 0, 0);
+  /*--background-start: rgb(248, 243, 253);*/
+  --background-start: rgba(30, 41, 59, 0.1);
+  --background-end: rgb(255, 255, 255);
 }
 
-/*@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground: rgb(255, 255, 255);
+    --background-start: rgb(0, 0, 0);
+    --background-end: rgb(0, 0, 0);
   }
-}*/
+}
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: var(--foreground);
   background: linear-gradient(
       to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-code{
-  @apply bg-gray-100 rounded px-1 inline-block shadow-inner;
+      var(--background-start) 10%,
+      var(--background-end) 40%,
+      var(--background-end) 100%
+    ),
+    var(--background-end);
 }

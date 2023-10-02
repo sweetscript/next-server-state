@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useOneServerState } from '../../state';
+import { useE1ServerState } from '../../state';
 import { actionUpdateName } from './actions';
 
-const OneServerActionsComponent = () => {
-  const [state] = useOneServerState();
+const E1ServerActionsComponent = () => {
+  const [state] = useE1ServerState();
 
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -18,19 +18,19 @@ const OneServerActionsComponent = () => {
   }, [state]);
 
   return (
-    <div className="p-4 rounded-lg relative">
+    <div className="relative rounded-lg p-4">
       <div
-        className="absolute inset-0 border border-dashed border-blue-500 bg-blue-100 rounded-lg animate-flash-once -z-10"
+        className="absolute inset-0 -z-10 animate-flash-once rounded-lg border border-dashed border-blue-500 bg-blue-100 dark:bg-blue-500/20"
         key={Math.random()}
       ></div>
       <p>Client component with server actions</p>
-      <p className="font-semibold flex-auto mt-2 bg-blue-700/10 px-2 py-1 rounded">
+      <p className="mt-2 flex-auto rounded bg-blue-700/10 px-2 py-1 font-semibold">
         Full Name: {(state.first_name ?? '') + ' ' + (state.last_name ?? '')}
       </p>
 
       <form
         action={actionUpdateName}
-        className="flex mt-2 items-center max-w-full"
+        className="mt-2 flex max-w-full items-center"
       >
         <input
           type="text"
@@ -43,15 +43,15 @@ const OneServerActionsComponent = () => {
         <input
           type="text"
           placeholder="Last name"
-          className="input w-auto flex-auto ml-2"
+          className="input ml-2 w-auto flex-auto"
           name="last_name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
-        <button className="button button-sky ml-2">Update</button>
+        <button className="button button-primary ml-2">Update</button>
       </form>
     </div>
   );
 };
 
-export default OneServerActionsComponent;
+export default E1ServerActionsComponent;

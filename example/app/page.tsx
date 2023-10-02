@@ -1,9 +1,9 @@
-import ExampleOne from './components/ExampleOne';
+import Guide from './components/Guide';
 
 export default function Home() {
   return (
     <div>
-      <ExampleOne />
+      <Guide />
     </div>
   );
 }

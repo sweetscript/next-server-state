@@ -3,7 +3,7 @@
 import { useTwoServerState } from '../state';
 import { FormEventHandler, useState } from 'react';
 
-const TwoClientComponent = () => {
+const E2ClientComponent = () => {
   const [state, updateState] = useTwoServerState();
 
   const handleIncrement = () => {
@@ -18,34 +18,34 @@ const TwoClientComponent = () => {
   };
 
   return (
-    <div className="p-4 rounded-lg mb-4 relative">
+    <div className="relative mb-4 rounded-lg p-4">
       <div
-        className="absolute inset-0 border border-dashed border-teal-500 bg-teal-100 rounded-lg animate-flash-once -z-10"
+        className="absolute inset-0 -z-10 animate-flash-once rounded-lg border border-dashed border-teal-500 bg-teal-100 dark:bg-teal-500/20"
         key={Math.random()}
       ></div>
       <p>Client Component</p>
 
-      <div className="flex mt-2 items-center max-w-full">
-        <p className="font-semibold flex-auto bg-teal-700/10 px-2 py-1 rounded">
+      <div className="mt-2 flex max-w-full items-center">
+        <p className="flex-auto rounded bg-teal-700/10 px-2 py-1 font-semibold">
           Counter: {`${state.counter ?? '0'}`}
         </p>
         <button
           type="button"
-          className="button button-sky ml-2 shrink-0"
+          className="button button-primary ml-2 shrink-0"
           onClick={handleDecrement}
         >
-          <span className="font-light scale-125 inline-block">-</span>
+          <span className="inline-block scale-125 font-light">-</span>
         </button>
         <button
           type="button"
-          className="button button-sky ml-2 shrink-0"
+          className="button button-primary ml-2 shrink-0"
           onClick={handleIncrement}
         >
-          <span className="font-light scale-125 inline-block">+</span>
+          <span className="inline-block scale-125 font-light">+</span>
         </button>
       </div>
     </div>
   );
 };
 
-export default TwoClientComponent;
+export default E2ClientComponent;

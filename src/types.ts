@@ -12,9 +12,9 @@ export type ServerContextReducer<T> = [
 ];
 
 export type ServerStateOptions = {
-  // uniqueKey: string;
-  enableSSE?: boolean;
   persist?: boolean;
+  disableRouterRefresh?: boolean;
+  enableSSE?: boolean;
 };
 
 export type ServerStateProviderProps<T extends Record<string, any>> =

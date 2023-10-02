@@ -1,11 +1,11 @@
 'use server';
 
-import { getOneServerState } from '../../state';
+import { getE1ServerState } from '../../state';
 
 export async function actionUpdateName(formData: FormData) {
   console.log('Server action: actionUpdateName', formData);
 
-  const [, updateState] = await getOneServerState();
+  const [, updateState] = await getE1ServerState();
 
   await updateState({
     first_name: `${formData?.get('first_name') || ''}`,

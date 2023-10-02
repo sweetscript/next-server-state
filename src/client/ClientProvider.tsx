@@ -1,44 +1,42 @@
 'use client';
 
-import React, { useCallback, useEffect, useReducer, useRef } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import { ClientContext } from './context';
 import { ClientProviderProps } from '../types';
 import Bridge from '../bridge/Bridge';
 import { useRouter } from 'next/navigation';
 
 function ClientProvider<T>(props: ClientProviderProps<T>) {
-  const { initState, uniqueKey, enableSSE, children } = props;
+  const {
+    initState,
+    uniqueKey,
+    enableSSE,
+    persist,
+    disableRouterRefresh,
+    defaultValues,
+    children
+  } = props;
   const router = useRouter();
-  const readyRef = useRef(false);
 
-  const refreshTimestamp = useCallback(() => {
-    if (!readyRef.current) {
-      readyRef.current = true;
-      return;
-    }
+  const refreshRouter = useCallback(() => {
+    if (disableRouterRefresh) return;
     // Not ideal, but only way to refresh server components is refresh router
     router.refresh();
-  }, [readyRef.current]);
+  }, []);
 
   const [state, updateState] = useReducer(
     (prev: T, next: Partial<T> | Record<string, any>) => {
       return { ...prev, ...next };
     },
-    initState
+    initState,
+    (data: any) => {
+      // Reset state if persist disabled
+      return persist ? data : defaultValues;
+    }
   );
-  // console.log(`${uniqueKey} render`);
-
-  // useEffect(() => {
-  //   if (!readyRef.current) {
-  //     readyRef.current = true;
-  //     return;
-  //   }
-  //
-  //   refreshTimestamp();
-  // }, [state]);
 
   useEffect(() => {
-    console.log(`ClientProvider ${uniqueKey} Added`);
+    // console.log(`ClientProvider ${uniqueKey} Added`);
 
     // Create fetch proxy if it doesn't already exist
     // The proxy triggers an event when next server actions are settled
@@ -63,7 +61,7 @@ function ClientProvider<T>(props: ClientProviderProps<T>) {
       window.fetchProxyAdded = true;
     }
     return () => {
-      console.log(`ClientProvider ${uniqueKey} REMOVED`);
+      // console.log(`ClientProvider ${uniqueKey} REMOVED`);
     };
   }, []);
 
@@ -75,7 +73,7 @@ function ClientProvider<T>(props: ClientProviderProps<T>) {
         updateState={updateState}
         uniqueKey={uniqueKey}
         enableSSE={enableSSE}
-        onUpdateFinish={refreshTimestamp}
+        onUpdateFinish={refreshRouter}
       />
     </ClientContext.Provider>
   );

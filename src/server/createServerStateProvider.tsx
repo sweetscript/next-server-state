@@ -6,7 +6,8 @@ export function createServerStateProvider<T extends Record<string, any>>(
   defaultValues: T,
   options: ServerStateProviderProps<T>
 ): CreateServerStateProvider {
-  const { session, uniqueKey, enableSSE, persist } = options;
+  const { session, uniqueKey, enableSSE, persist, disableRouterRefresh } =
+    options;
 
   return async function handler(props) {
     const initState = session ? ((await session().get(uniqueKey)) as T) : null;
@@ -15,10 +16,12 @@ export function createServerStateProvider<T extends Record<string, any>>(
     console.log(`server render ${uniqueKey}`);
     return (
       <ClientProvider
-        initState={(persist && initState) ?? defaultValues}
+        initState={initState ?? defaultValues}
         defaultValues={defaultValues}
         uniqueKey={uniqueKey}
         enableSSE={enableSSE}
+        persist={persist}
+        disableRouterRefresh={disableRouterRefresh}
       >
         {children}
       </ClientProvider>

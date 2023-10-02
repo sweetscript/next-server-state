@@ -1,10 +1,10 @@
 'use client';
 
-import { useOneServerState } from '../state';
+import { useE1ServerState } from '../state';
 import { FormEventHandler, useState } from 'react';
 
-const OneClientComponent = () => {
-  const [state, updateState] = useOneServerState();
+const E1ClientComponent = () => {
+  const [state, updateState] = useE1ServerState();
 
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -20,20 +20,20 @@ const OneClientComponent = () => {
   };
 
   return (
-    <div className="p-4 rounded-lg mb-4 relative z-10">
+    <div className="relative z-10 mb-4 rounded-lg p-4">
       <div
-        className="absolute inset-0 border border-dashed border-teal-500 bg-teal-100 rounded-lg animate-flash-once -z-10"
+        className="absolute inset-0 -z-10 animate-flash-once rounded-lg border border-dashed border-teal-500 bg-teal-100 dark:bg-teal-500/20"
         key={Math.random()}
       ></div>
       <p>Client Component</p>
 
-      <p className="font-semibold flex-auto mt-2 bg-teal-700/10 px-2 py-1 rounded">
+      <p className="mt-2 flex-auto rounded bg-teal-700/10 px-2 py-1 font-semibold">
         Full Name: {(state.first_name ?? '') + ' ' + (state.last_name ?? '')}
       </p>
 
       <form
         onSubmit={handleSubmit}
-        className="flex mt-2 items-center max-w-full"
+        className="mt-2 flex max-w-full items-center"
       >
         <input
           type="text"
@@ -45,14 +45,14 @@ const OneClientComponent = () => {
         <input
           type="text"
           placeholder="Last name"
-          className="input w-auto flex-auto ml-2"
+          className="input ml-2 w-auto flex-auto"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
-        <button className="button button-sky ml-2">Update</button>
+        <button className="button button-primary ml-2">Update</button>
       </form>
     </div>
   );
 };
 
-export default OneClientComponent;
+export default E1ClientComponent;

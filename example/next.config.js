@@ -4,6 +4,7 @@ const nextConfig = {
     externalDir: true,
     serverActions: true
   }
+  // reactStrictMode: false
 };
 
 module.exports = nextConfig;
