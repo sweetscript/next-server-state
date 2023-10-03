@@ -13,7 +13,7 @@ export function createServerStateProvider<T extends Record<string, any>>(
     const initState = session ? ((await session().get(uniqueKey)) as T) : null;
 
     const { children } = props;
-    console.log(`server render ${uniqueKey}`);
+
     return (
       <ClientProvider
         initState={initState ?? defaultValues}

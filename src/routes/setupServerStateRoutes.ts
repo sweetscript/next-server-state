@@ -38,7 +38,8 @@ export function setupServerStateRoutes(options?: ServerStateRoutesOptions) {
       }
     } else if (req.query?.path?.[0] === 'sse') {
       // Endpoint to feed Server Side Event
-      res.writeHead(200, {
+      // TODO: Implement SSE option to catch route handler updates and rerender FE components
+      /*res.writeHead(200, {
         Connection: 'keep-alive',
         'Content-Encoding': 'none',
         'Cache-Control': 'no-cache, no-transform',
@@ -66,8 +67,7 @@ export function setupServerStateRoutes(options?: ServerStateRoutesOptions) {
         clearInterval(interval);
         res.end();
       });
-      return;
-      // res.status(200).json(req.query)
+      return;*/
     }
     res.status(404).end();
   };

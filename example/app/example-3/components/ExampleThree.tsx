@@ -6,8 +6,8 @@ import ExampleThreeCode from './ExampleThreeCode';
 
 const ExampleThree = () => {
   return (
-    <div className="rounded-lg border-2 border-dashed border-slate-500 p-4 font-mono text-sm">
-      <h2 className="mb-3 text-lg font-bold">Example 3 (no router refresh)</h2>
+    <div className="rounded-lg border-2 border-dashed border-slate-500 p-4 text-sm">
+      <h2 className="mb-2 text-lg font-bold">Example 3 (no router refresh)</h2>
       <p className="mb-3 text-sm">
         In this example we have the router refresh option disabled{' '}
         <code className="code">disableRouterRefresh: true</code>.<br />

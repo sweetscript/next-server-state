@@ -29,7 +29,7 @@
   }
 
   .code {
-    @apply inline-block rounded bg-gray-200 px-1 shadow-inner dark:bg-white/20;
+    @apply inline-block rounded text-sm bg-gray-200 px-1 shadow-inner dark:bg-white/20;
   }
 }
 

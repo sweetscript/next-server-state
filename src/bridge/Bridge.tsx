@@ -47,8 +47,6 @@ const Bridge = (props: BridgeProps) => {
   }, [state]);
 
   useEffect(() => {
-    console.log(`Bridge (${uniqueKey}) Added`);
-
     // Attach fetch listener to listen for server actions and refresh the status
     function fetchStateFromServer() {
       fetch(`/api/server-state/handle/${uniqueKey}`, {
@@ -57,7 +55,6 @@ const Bridge = (props: BridgeProps) => {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log('res', res);
           updateState(res);
           setTimeout(() => {
             onUpdateFinish();
@@ -70,7 +67,6 @@ const Bridge = (props: BridgeProps) => {
     window.addEventListener('server-action-settled', fetchStateFromServer);
 
     return () => {
-      console.log(`Bridge (${uniqueKey}) REMOVED`);
       // Detach fetch listener
       window.removeEventListener('server-action-settled', fetchStateFromServer);
     };
