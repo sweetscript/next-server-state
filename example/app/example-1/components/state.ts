@@ -2,7 +2,7 @@ import {
   createServerState,
   getServerState,
   useServerState
-} from '../../../../src/index';
+} from '../../../../';
 
 type ExampleOneServerStateProps = {
   first_name: string;

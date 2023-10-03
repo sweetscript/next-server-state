@@ -24,7 +24,7 @@
             "version": "detect"
         }
     },
-    "ignorePatterns": ["node_modules", "dist"],
+    "ignorePatterns": ["node_modules", "dist", "example"],
     "rules": {
         "@typescript-eslint/no-explicit-any": "warn"
     }

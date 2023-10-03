@@ -156,7 +156,7 @@ export async function MyServerComponent(){
       <div className="mb-1">
         <CodeBlock
           code={`// server-actions.ts
-          'use server'
+'use server'
 import { getMyServerState } from '../lib/my-server-state.ts'; // import from the file you initialised the server state in
 
 export async function actionIncrementCounter(formData: FormData) {
@@ -175,7 +175,7 @@ export async function actionIncrementCounter(formData: FormData) {
       <div className="mb-4">
         <CodeBlock
           code={`// MyClientComponent.ts
-          'use client'
+'use client'
 import { useMyServerState } from '../lib/my-server-state.ts'; // import from the file you initialised the server state in
 import { actionIncrementCounter } from './server-actions.ts'; // import from the file you initialised the server state in
 
