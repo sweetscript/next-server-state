@@ -24,6 +24,16 @@ export type ServerStateOptions = {
      */
     disableRouterRefresh?: boolean;
     /**
+     * Disable api update request
+     * this request is used to update the server state when client state has been updated
+     */
+    disableApiUpdateRequest?: boolean;
+    /**
+     * Disable fetch api request
+     * this request is used to update the client state when a server action has been triggered
+     */
+    disableApiFetchRequest?: boolean;
+    /**
      * Work in progress feature
      */
     enableSSE?: boolean;
@@ -60,7 +70,7 @@ export interface ClientProviderProps<T> extends ServerStateOptions {
 }
 export type UseServerContext<T> = ServerContextReducer<T>;
 export type GetServerContext<T> = ServerContextReducer<T>;
-export type BridgeProps = Pick<ServerStateOptions, 'enableSSE' | 'apiBaseUrl'> & {
+export type BridgeProps = Pick<ServerStateOptions, 'enableSSE' | 'apiBaseUrl' | 'disableApiUpdateRequest' | 'disableApiFetchRequest'> & {
     uniqueKey: string;
     state: any;
     updateState: (data: any) => void;
@@ -68,7 +78,7 @@ export type BridgeProps = Pick<ServerStateOptions, 'enableSSE' | 'apiBaseUrl'> &
 };
 export type ServerStateRoutesOptions = {
     restrictKeys?: string[];
-    sessionOptions: SessionOptions;
+    sessionOptions?: SessionOptions;
 };
 declare global {
     interface Window {

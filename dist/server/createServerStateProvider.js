@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import React from 'react';
 import ClientProvider from '../client/ClientProvider';
 export function createServerStateProvider(defaultValues, options) {
-    var session = options.session, uniqueKey = options.uniqueKey, enableSSE = options.enableSSE, persist = options.persist, disableRouterRefresh = options.disableRouterRefresh;
+    var session = options.session, uniqueKey = options.uniqueKey, enableSSE = options.enableSSE, persist = options.persist, disableRouterRefresh = options.disableRouterRefresh, disableApiUpdateRequest = options.disableApiUpdateRequest, disableApiFetchRequest = options.disableApiFetchRequest;
     return function handler(props) {
         return __awaiter(this, void 0, void 0, function () {
             var initState, _a, children;
@@ -55,7 +55,7 @@ export function createServerStateProvider(defaultValues, options) {
                     case 3:
                         initState = _a;
                         children = props.children;
-                        return [2 /*return*/, (React.createElement(ClientProvider, { initState: initState !== null && initState !== void 0 ? initState : defaultValues, defaultValues: defaultValues, uniqueKey: uniqueKey, enableSSE: enableSSE, persist: persist, disableRouterRefresh: disableRouterRefresh }, children))];
+                        return [2 /*return*/, (React.createElement(ClientProvider, { initState: initState !== null && initState !== void 0 ? initState : defaultValues, defaultValues: defaultValues, uniqueKey: uniqueKey, enableSSE: enableSSE, persist: persist, disableRouterRefresh: disableRouterRefresh, disableApiUpdateRequest: disableApiUpdateRequest, disableApiFetchRequest: disableApiFetchRequest }, children))];
                 }
             });
         });

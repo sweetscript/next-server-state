@@ -10,7 +10,7 @@ const E3ServerActionsComponent = () => {
   const [note, setNote] = useState<string>('');
 
   useEffect(() => {
-    if (state && state.first_name !== '') {
+    if (state && state.note !== '') {
       setNote('');
     }
   }, [state]);

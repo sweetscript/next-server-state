@@ -97,7 +97,7 @@ export type BridgeProps = Pick<
 
 export type ServerStateRoutesOptions = {
   restrictKeys?: string[];
-  sessionOptions: SessionOptions;
+  sessionOptions?: SessionOptions;
 };
 
 declare global {

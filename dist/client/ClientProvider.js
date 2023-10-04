@@ -15,7 +15,7 @@ import { ClientContext } from './context';
 import Bridge from '../bridge/Bridge';
 import { useRouter } from 'next/navigation';
 function ClientProvider(props) {
-    var initState = props.initState, uniqueKey = props.uniqueKey, enableSSE = props.enableSSE, persist = props.persist, disableRouterRefresh = props.disableRouterRefresh, defaultValues = props.defaultValues, children = props.children;
+    var initState = props.initState, uniqueKey = props.uniqueKey, enableSSE = props.enableSSE, persist = props.persist, disableRouterRefresh = props.disableRouterRefresh, disableApiUpdateRequest = props.disableApiUpdateRequest, disableApiFetchRequest = props.disableApiFetchRequest, defaultValues = props.defaultValues, children = props.children;
     var router = useRouter();
     var refreshRouter = useCallback(function () {
         if (disableRouterRefresh)
@@ -32,7 +32,7 @@ function ClientProvider(props) {
     useEffect(function () {
         // Create fetch proxy if it doesn't already exist
         // The proxy triggers an event when next server actions are settled
-        if (!window.fetchProxyAdded) {
+        if (!disableApiFetchRequest && !window.fetchProxyAdded) {
             window.fetch = new Proxy(window.fetch, {
                 apply: function (actualFetch, that, args) {
                     var result = Reflect.apply(actualFetch, that, args);

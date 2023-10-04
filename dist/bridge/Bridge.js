@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 var Bridge = function (props) {
     var 
     // enableSSE,
-    state = props.state, updateState = props.updateState, uniqueKey = props.uniqueKey, onUpdateFinish = props.onUpdateFinish;
+    state = props.state, updateState = props.updateState, uniqueKey = props.uniqueKey, onUpdateFinish = props.onUpdateFinish, disableApiUpdateRequest = props.disableApiUpdateRequest, disableApiFetchRequest = props.disableApiFetchRequest;
     var updateController = useRef(null);
     var readyRef = useRef(false);
     useEffect(function () {
@@ -11,7 +11,7 @@ var Bridge = function (props) {
             readyRef.current = true;
             return;
         }
-        if (!state)
+        if (disableApiUpdateRequest || !state)
             return;
         if (updateController.current) {
             updateController.current.abort();
@@ -53,10 +53,14 @@ var Bridge = function (props) {
                 //
             });
         }
-        window.addEventListener('server-action-settled', fetchStateFromServer);
+        if (!disableApiFetchRequest) {
+            window.addEventListener('server-action-settled', fetchStateFromServer);
+        }
         return function () {
             // Detach fetch listener
-            window.removeEventListener('server-action-settled', fetchStateFromServer);
+            if (!disableApiFetchRequest) {
+                window.removeEventListener('server-action-settled', fetchStateFromServer);
+            }
         };
     }, []);
     /*let eventSource: EventSource | undefined;
