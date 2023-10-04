@@ -34,7 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { serverStateSession } from '../server/session';
+import { serverStateSession } from '../server/session.js';
 export function setupServerStateRoutes(options) {
     var _a = options || {}, restrictKeys = _a.restrictKeys, sessionOptions = _a.sessionOptions;
     return function handler(req, res) {
