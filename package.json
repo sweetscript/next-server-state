@@ -1,6 +1,6 @@
 {
   "name": "next-server-state",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A package that provides shared state management between Server and Client components in Next.JS v13 app router",
   "type": "module",
   "source": "src/index.ts",
