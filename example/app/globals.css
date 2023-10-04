@@ -23,9 +23,9 @@
   .input {
     @apply min-w-0 rounded-lg border border-gray-200 bg-white bg-white px-2.5 py-1 text-base text-slate-800 outline-none focus:border-blue-500 dark:bg-white/10
     dark:text-white dark:focus:border-violet-500 md:text-sm;
-    &:not(textarea) {
-      @apply h-[36px];
-    }
+  }
+  input:not(textarea) {
+     @apply h-[36px];
   }
 
   .code {
