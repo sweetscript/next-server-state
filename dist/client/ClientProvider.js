@@ -20,7 +20,7 @@ function ClientProvider(props) {
     var refreshRouter = useCallback(function () {
         if (disableRouterRefresh)
             return;
-        // Not ideal, but only way to refresh server components is refresh router
+        // Not ideal, but only way to rerender server components is refresh router
         router.refresh();
     }, []);
     var _a = useReducer(function (prev, next) {
@@ -30,7 +30,6 @@ function ClientProvider(props) {
         return persist ? data : defaultValues;
     }), state = _a[0], updateState = _a[1];
     useEffect(function () {
-        // console.log(`ClientProvider ${uniqueKey} Added`);
         // Create fetch proxy if it doesn't already exist
         // The proxy triggers an event when next server actions are settled
         if (!window.fetchProxyAdded) {
@@ -49,9 +48,7 @@ function ClientProvider(props) {
             });
             window.fetchProxyAdded = true;
         }
-        return function () {
-            // console.log(`ClientProvider ${uniqueKey} REMOVED`);
-        };
+        return function () { };
     }, []);
     return (React.createElement(ClientContext.Provider, { value: { state: state, updateState: updateState } },
         children,

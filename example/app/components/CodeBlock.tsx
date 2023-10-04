@@ -14,7 +14,7 @@ const CodeBlock = (props: CodeBlockProps) => {
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
             style={style}
-            className="overflow-auto rounded-lg px-2.5 py-2.5 text-xs"
+            className="overflow-auto rounded-lg px-2.5 py-2.5 text-sm"
           >
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({ line })}>

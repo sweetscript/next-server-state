@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useReducer } from 'react';
 import { ClientContext } from './context';
-import { ClientProviderProps } from '../types';
+import { ClientProviderProps, Obj } from '../types';
 import Bridge from '../bridge/Bridge';
 import { useRouter } from 'next/navigation';
 
@@ -20,12 +20,12 @@ function ClientProvider<T>(props: ClientProviderProps<T>) {
 
   const refreshRouter = useCallback(() => {
     if (disableRouterRefresh) return;
-    // Not ideal, but only way to refresh server components is refresh router
+    // Not ideal, but only way to rerender server components is refresh router
     router.refresh();
   }, []);
 
   const [state, updateState] = useReducer(
-    (prev: T, next: Partial<T> | Record<string, any>) => {
+    (prev: T, next: Partial<T> | Obj) => {
       return { ...prev, ...next };
     },
     initState,
@@ -36,8 +36,6 @@ function ClientProvider<T>(props: ClientProviderProps<T>) {
   );
 
   useEffect(() => {
-    // console.log(`ClientProvider ${uniqueKey} Added`);
-
     // Create fetch proxy if it doesn't already exist
     // The proxy triggers an event when next server actions are settled
     if (!window.fetchProxyAdded) {
@@ -60,9 +58,7 @@ function ClientProvider<T>(props: ClientProviderProps<T>) {
       });
       window.fetchProxyAdded = true;
     }
-    return () => {
-      // console.log(`ClientProvider ${uniqueKey} REMOVED`);
-    };
+    return () => {};
   }, []);
 
   return (

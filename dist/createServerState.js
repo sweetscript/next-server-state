@@ -14,7 +14,7 @@ import { ClientContext } from './client/context';
 import { serverStateSession } from './server/session';
 export function createServerState(uniqueKey, defaultValues, options) {
     if (options === void 0) { options = {}; }
-    var session = serverStateSession;
+    var session = serverStateSession(options.sessionOptions);
     return {
         uniqueKey: uniqueKey,
         Provider: createServerStateProvider(defaultValues, __assign(__assign({}, options), { uniqueKey: uniqueKey, session: session })),

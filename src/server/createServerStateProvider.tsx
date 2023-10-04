@@ -1,8 +1,12 @@
 import React from 'react';
-import { CreateServerStateProvider, ServerStateProviderProps } from '../types';
+import {
+  CreateServerStateProvider,
+  Obj,
+  ServerStateProviderProps
+} from '../types';
 import ClientProvider from '../client/ClientProvider';
 
-export function createServerStateProvider<T extends Record<string, any>>(
+export function createServerStateProvider<T extends Obj>(
   defaultValues: T,
   options: ServerStateProviderProps<T>
 ): CreateServerStateProvider {

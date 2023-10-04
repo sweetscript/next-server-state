@@ -1,6 +1,3 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-type ServerStateRoutesOptions = {
-    restrictKeys?: string[];
-};
+import { ServerStateRoutesOptions } from '../types';
 export declare function setupServerStateRoutes(options?: ServerStateRoutesOptions): (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
-export {};

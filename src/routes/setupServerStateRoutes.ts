@@ -1,20 +1,21 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { serverStateSession } from '../server/session';
-
-type ServerStateRoutesOptions = {
-  restrictKeys?: string[];
-};
+import { ServerStateRoutesOptions } from '../types';
 
 export function setupServerStateRoutes(options?: ServerStateRoutesOptions) {
-  const { restrictKeys } = options || {};
+  const { restrictKeys, sessionOptions } = options || {};
   return async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const session = await serverStateSession(sessionOptions)(req);
+
+    // GET/POST endpoints to manage state by key
     if (req.query?.path?.[0] === 'handle') {
       const stateKey = req.query.path?.[1];
       if (!stateKey || stateKey === '') {
         res.status(401).end();
         return;
       }
-      // Endpoint to update session data
+
+      // Make sure key is whitelisted
       if (
         restrictKeys &&
         restrictKeys.filter(
@@ -29,11 +30,13 @@ export function setupServerStateRoutes(options?: ServerStateRoutesOptions) {
       }
 
       if (req.method?.toUpperCase() === 'POST') {
-        await serverStateSession(req).set(stateKey, req.body);
+        // Endpoint to update session data
+        await session.set(stateKey, req.body);
         res.status(200).json({ message: 'Updated' });
         return;
       } else if (req.method?.toUpperCase() === 'GET') {
-        res.status(200).json(await serverStateSession(req).get(stateKey));
+        // Endpoint to get session data
+        res.status(200).json(await session.get(stateKey));
         return;
       }
     } else if (req.query?.path?.[0] === 'sse') {

@@ -1,7 +1,7 @@
-import { CreateServerState, UseServerContext } from '../types';
+import { CreateServerState, Obj, UseServerContext } from '../types';
 import { useContext } from 'react';
 
-export function useServerState<T extends Record<string, any>>(
+export function useServerState<T extends Obj>(
   serverContext: CreateServerState<T>
 ): UseServerContext<T> {
   const context = useContext(serverContext.ClientContext);

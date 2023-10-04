@@ -5,21 +5,19 @@ import CodeBlock from './CodeBlock';
 const Guide = () => {
   return (
     <div>
-      <p className="mb-4 text-xl font-bold uppercase text-red-500">
-        🚧 Work in progress
-      </p>
-
       <h2 className="mb-3 text-2xl font-bold">Introduction</h2>
 
       <p>
-        This library is to provide shared state between server and client
-        components in Next.js RSC App router. The library uses serverside
-        session storage to store the server state.
+        This package provides shared state between server and client components
+        in Next.js App router. It utilizes server-side session storage to store
+        the state, seamlessly synchronizing it across components. Additionally,
+        it offers a easy approach for reading and writing state data from both
+        server and client sides.
       </p>
       <hr className="my-6 border-slate-200 dark:border-white/20" />
       <h2 className="mb-3 text-2xl font-bold">Setup</h2>
 
-      <p className="mb-2">Install package:</p>
+      <p className="mb-2 font-semibold">Install package:</p>
       <div className="mb-4">
         <CodeBlock
           code="npm i next-app-session"
@@ -28,7 +26,8 @@ const Guide = () => {
         />
       </div>
       <p className="mb-2">
-        Setup dynamic route: create file with path:{' '}
+        <span className="font-semibold">Setup dynamic route:</span> create file
+        with path:{' '}
         <code className="code">/pages/api/server-state/[...path].ts</code>
       </p>
       <div className="mb-4">
@@ -41,7 +40,7 @@ export default setupServerStateRoutes();`}
           showLineNumbers={false}
         />
       </div>
-      <p className="mb-2">Setup your server state:</p>
+      <p className="mb-2 font-semibold">Setup your server state:</p>
       <div className="mb-4">
         <CodeBlock
           code={`// /lib/my-server-state.ts
@@ -75,8 +74,9 @@ export async function getMyServerState() {
         />
       </div>
       <p className="mb-2">
-        Setup state context: Wrap your server and client component of which you
-        wish to consume the server state in
+        <span className="font-semibold">Setup state context:</span> Wrap your
+        server and client component of which you wish to consume the server
+        state in
       </p>
       <div className="mb-4">
         <CodeBlock
@@ -96,10 +96,33 @@ export const MyParentComponent = () => {
       <hr className="my-6 border-slate-200 dark:border-white/20" />
       <h2 className="mb-3 mt-8 text-2xl font-bold">Usage</h2>
       <p className="mb-2">
-        In <code className="code">Client Component</code> you can read and set
-        state data like so:
+        How you use the server state depends on whether you're using it on
+        server side or client side:
       </p>
-      <div className="mb-4">
+      <ul className="mb-6 ml-4 list-outside list-disc space-y-4">
+        <li>
+          <span className="font-semibold">Client Components</span>
+          <CodeBlock
+            code={`const [state, updateState] = useServerSide(myServerState)`}
+            showLineNumbers={false}
+          />
+        </li>
+        <li>
+          <span className="font-semibold">
+            Server Components + Server Actions + Route Handlers
+          </span>
+          <CodeBlock
+            code={`const [state, updateState] = getServerSide(myServerState)`}
+            showLineNumbers={false}
+          />
+        </li>
+      </ul>
+      <h3 className="mb-2 text-lg font-bold">Usage cases</h3>
+      <p className="mb-2">
+        <span className="font-semibold">Client Component</span> you can read and
+        set state data like so:
+      </p>
+      <div className="mb-5">
         <CodeBlock
           code={`'use client'
 import { useMyServerState } from '../lib/my-server-state.ts'; // import from the file you initialised the server state in
@@ -114,10 +137,10 @@ export function MyClientComponent(){
     }
     
     return (
-        <span>
+        <div>
             <p>Counter: <span>{state.counter}</span></p>
             <button type="button" onClick={handleIncrement}>Increment</button>
-        </p>
+        </div>
     )
 }`}
           language="jsx"
@@ -125,10 +148,10 @@ export function MyClientComponent(){
         />
       </div>
       <p className="mb-2">
-        In <code className="code">Server Component</code> you can read state and
-        render it like so:
+        <span className="font-semibold">Server Component</span> you can read
+        state and render it like so:
       </p>
-      <div className="mb-4">
+      <div className="mb-5">
         <CodeBlock
           code={`import { getMyServerState } from '../lib/my-server-state.ts'; // import from the file you initialised the server state in
 
@@ -137,6 +160,7 @@ export async function MyServerComponent(){
     
     // If needed although not recommended, You can also update state on server component render 
     // await updateState({ first_name: 'new name' })
+    // const [newState] = await getServerState();
     
     return (
         <span>
@@ -150,7 +174,9 @@ export async function MyServerComponent(){
         />
       </div>
       <p className="mb-2">
-        In <code className="code">Client Component with Server Actions</code>{' '}
+        <span className="font-semibold">
+          Client Component with Server Actions
+        </span>{' '}
         you can read and set state data like so:
       </p>
       <div className="mb-1">
@@ -172,23 +198,23 @@ export async function actionIncrementCounter(formData: FormData) {
           showLineNumbers={false}
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-5">
         <CodeBlock
           code={`// MyClientComponent.ts
 'use client'
 import { useMyServerState } from '../lib/my-server-state.ts'; // import from the file you initialised the server state in
-import { actionIncrementCounter } from './server-actions.ts'; // import from the file you initialised the server state in
+import { actionIncrementCounter } from './server-actions.ts'; // Your server actions
 
 export function MyClientComponent(){
     const [state] = useMyServerState();
     
     return (
-        <span>
+        <div>
             <p>Counter: <span>{state.counter}</span></p>
             <form action={actionIncrementCounter}>
                 <button type="submit">Increment</button>
             </form>
-        </p>
+        </div>
     )
 }`}
           language="jsx"
@@ -196,8 +222,8 @@ export function MyClientComponent(){
         />
       </div>
       <p className="mb-2">
-        In <code className="code">App Route Handler</code> you can read and set
-        state data like so:
+        <span className="font-semibold">App Route Handler</span> you can read
+        and set state data like so:
       </p>
       <div className="mb-4">
         <CodeBlock

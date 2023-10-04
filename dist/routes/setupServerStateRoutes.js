@@ -36,21 +36,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { serverStateSession } from '../server/session';
 export function setupServerStateRoutes(options) {
-    var restrictKeys = (options || {}).restrictKeys;
+    var _a = options || {}, restrictKeys = _a.restrictKeys, sessionOptions = _a.sessionOptions;
     return function handler(req, res) {
         var _a, _b, _c, _d, _e, _f, _g;
         return __awaiter(this, void 0, void 0, function () {
-            var stateKey_1, _h, _j;
+            var session, stateKey_1, _h, _j;
             return __generator(this, function (_k) {
                 switch (_k.label) {
-                    case 0:
-                        if (!(((_b = (_a = req.query) === null || _a === void 0 ? void 0 : _a.path) === null || _b === void 0 ? void 0 : _b[0]) === 'handle')) return [3 /*break*/, 5];
+                    case 0: return [4 /*yield*/, serverStateSession(sessionOptions)(req)];
+                    case 1:
+                        session = _k.sent();
+                        if (!(((_b = (_a = req.query) === null || _a === void 0 ? void 0 : _a.path) === null || _b === void 0 ? void 0 : _b[0]) === 'handle')) return [3 /*break*/, 6];
                         stateKey_1 = (_c = req.query.path) === null || _c === void 0 ? void 0 : _c[1];
                         if (!stateKey_1 || stateKey_1 === '') {
                             res.status(401).end();
                             return [2 /*return*/];
                         }
-                        // Endpoint to update session data
+                        // Make sure key is whitelisted
                         if (restrictKeys &&
                             restrictKeys.filter(function (p) { return p.toLowerCase() == stateKey_1.toLowerCase(); }).length === 0) {
                             res.status(401).json({
@@ -58,21 +60,25 @@ export function setupServerStateRoutes(options) {
                             });
                             return [2 /*return*/];
                         }
-                        if (!(((_d = req.method) === null || _d === void 0 ? void 0 : _d.toUpperCase()) === 'POST')) return [3 /*break*/, 2];
-                        return [4 /*yield*/, serverStateSession(req).set(stateKey_1, req.body)];
-                    case 1:
+                        if (!(((_d = req.method) === null || _d === void 0 ? void 0 : _d.toUpperCase()) === 'POST')) return [3 /*break*/, 3];
+                        // Endpoint to update session data
+                        return [4 /*yield*/, session.set(stateKey_1, req.body)];
+                    case 2:
+                        // Endpoint to update session data
                         _k.sent();
                         res.status(200).json({ message: 'Updated' });
                         return [2 /*return*/];
-                    case 2:
-                        if (!(((_e = req.method) === null || _e === void 0 ? void 0 : _e.toUpperCase()) === 'GET')) return [3 /*break*/, 4];
-                        _j = (_h = res.status(200)).json;
-                        return [4 /*yield*/, serverStateSession(req).get(stateKey_1)];
                     case 3:
+                        if (!(((_e = req.method) === null || _e === void 0 ? void 0 : _e.toUpperCase()) === 'GET')) return [3 /*break*/, 5];
+                        // Endpoint to get session data
+                        _j = (_h = res.status(200)).json;
+                        return [4 /*yield*/, session.get(stateKey_1)];
+                    case 4:
+                        // Endpoint to get session data
                         _j.apply(_h, [_k.sent()]);
                         return [2 /*return*/];
-                    case 4: return [3 /*break*/, 6];
-                    case 5:
+                    case 5: return [3 /*break*/, 7];
+                    case 6:
                         if (((_g = (_f = req.query) === null || _f === void 0 ? void 0 : _f.path) === null || _g === void 0 ? void 0 : _g[0]) === 'sse') {
                             // Endpoint to feed Server Side Event
                             // TODO: Implement SSE option to catch route handler updates and rerender FE components
@@ -106,8 +112,8 @@ export function setupServerStateRoutes(options) {
                             });
                             return;*/
                         }
-                        _k.label = 6;
-                    case 6:
+                        _k.label = 7;
+                    case 7:
                         res.status(404).end();
                         return [2 /*return*/];
                 }
