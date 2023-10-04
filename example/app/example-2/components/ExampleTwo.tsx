@@ -15,15 +15,15 @@ const ExampleTwo = () => {
         <code className="code">persist: true</code>, meaning the state will be
         preserved even after you refresh or navigate out of this page
       </p>
-      <div className="relative items-start gap-4 md:flex md:flex-row-reverse md:flex-nowrap">
-        <div className="md:w-1/2">
+      <div className="relative items-start md:flex md:flex-row-reverse md:flex-nowrap">
+        <div className="md:w-1/2 md:pl-2">
           <ExampleTwoServerState.Provider>
             <E2ServerComponent />
             <E2ClientComponent />
             <E2ServerActionsComponent />
           </ExampleTwoServerState.Provider>
         </div>
-        <div className="top-0 mt-4 md:sticky md:mt-0 md:w-1/2">
+        <div className="top-0 mt-4 md:sticky md:mt-0 md:w-1/2 md:pr-2">
           <ExampleTwoCode />
         </div>
       </div>

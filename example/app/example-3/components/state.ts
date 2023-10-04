@@ -2,7 +2,7 @@ import {
   createServerState,
   getServerState,
   useServerState
-} from '../../../../src/index';
+} from 'next-server-state';
 
 type Example3ServerStateProps = {
   note: string;

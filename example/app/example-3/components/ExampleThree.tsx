@@ -16,14 +16,14 @@ const ExampleThree = () => {
         refresh is not necessary.
       </p>
       <div className="relative items-start gap-4 md:flex md:flex-row-reverse md:flex-nowrap">
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 md:pl-2">
           <ExampleThreeServerState.Provider>
             <E3ServerComponent />
             <E3ClientComponent />
             <E3ServerActionsComponent />
           </ExampleThreeServerState.Provider>
         </div>
-        <div className="top-0 mt-4 md:sticky md:mt-0 md:w-1/2">
+        <div className="top-0 mt-4 md:sticky md:mt-0 md:w-1/2 md:pr-2">
           <ExampleThreeCode />
         </div>
       </div>

@@ -2,7 +2,7 @@ import {
   createServerState,
   getServerState,
   useServerState
-} from '../../../../';
+} from 'next-server-state';
 
 type ExampleOneServerStateProps = {
   first_name: string;
