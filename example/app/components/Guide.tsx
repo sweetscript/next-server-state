@@ -5,6 +5,10 @@ import CodeBlock from './CodeBlock';
 const Guide = () => {
   return (
     <div>
+      <p className="mb-4 text-xl font-bold uppercase text-red-500">
+        🚧 Experimental
+      </p>
+
       <h2 className="mb-3 text-2xl font-bold">Introduction</h2>
 
       <p>

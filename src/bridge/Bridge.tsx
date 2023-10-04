@@ -9,7 +9,9 @@ const Bridge = (props: BridgeProps) => {
     state,
     updateState,
     uniqueKey,
-    onUpdateFinish
+    onUpdateFinish,
+    disableApiUpdateRequest,
+    disableApiFetchRequest
   } = props;
   const updateController = useRef<AbortController | null>(null);
   const readyRef = useRef(false);
@@ -20,7 +22,7 @@ const Bridge = (props: BridgeProps) => {
       return;
     }
 
-    if (!state) return;
+    if (disableApiUpdateRequest || !state) return;
     if (updateController.current) {
       updateController.current.abort();
     }
@@ -64,11 +66,18 @@ const Bridge = (props: BridgeProps) => {
           //
         });
     }
-    window.addEventListener('server-action-settled', fetchStateFromServer);
+    if (!disableApiFetchRequest) {
+      window.addEventListener('server-action-settled', fetchStateFromServer);
+    }
 
     return () => {
       // Detach fetch listener
-      window.removeEventListener('server-action-settled', fetchStateFromServer);
+      if (!disableApiFetchRequest) {
+        window.removeEventListener(
+          'server-action-settled',
+          fetchStateFromServer
+        );
+      }
     };
   }, []);
 

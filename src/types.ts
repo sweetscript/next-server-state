@@ -28,6 +28,18 @@ export type ServerStateOptions = {
   disableRouterRefresh?: boolean;
 
   /**
+   * Disable api update request
+   * this request is used to update the server state when client state has been updated
+   */
+  disableApiUpdateRequest?: boolean;
+
+  /**
+   * Disable fetch api request
+   * this request is used to update the client state when a server action has been triggered
+   */
+  disableApiFetchRequest?: boolean;
+
+  /**
    * Work in progress feature
    */
   enableSSE?: boolean;
@@ -72,7 +84,10 @@ export type GetServerContext<T> = ServerContextReducer<T>;
 
 export type BridgeProps = Pick<
   ServerStateOptions,
-  'enableSSE' | 'apiBaseUrl'
+  | 'enableSSE'
+  | 'apiBaseUrl'
+  | 'disableApiUpdateRequest'
+  | 'disableApiFetchRequest'
 > & {
   uniqueKey: string;
   state: any;

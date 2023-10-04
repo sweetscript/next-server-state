@@ -13,6 +13,8 @@ function ClientProvider<T>(props: ClientProviderProps<T>) {
     enableSSE,
     persist,
     disableRouterRefresh,
+    disableApiUpdateRequest,
+    disableApiFetchRequest,
     defaultValues,
     children
   } = props;
@@ -38,7 +40,7 @@ function ClientProvider<T>(props: ClientProviderProps<T>) {
   useEffect(() => {
     // Create fetch proxy if it doesn't already exist
     // The proxy triggers an event when next server actions are settled
-    if (!window.fetchProxyAdded) {
+    if (!disableApiFetchRequest && !window.fetchProxyAdded) {
       window.fetch = new Proxy(window.fetch, {
         apply(actualFetch, that, args) {
           const result = Reflect.apply(actualFetch, that, args);
