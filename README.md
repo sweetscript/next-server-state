@@ -14,7 +14,7 @@ server and client sides.
 ### Install package:
 
 ```
-npm i next-app-session
+npm i next-server-state
 ```
 
 ### Setup dynamic route: 

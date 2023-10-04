@@ -24,7 +24,7 @@ const Guide = () => {
       <p className="mb-2 font-semibold">Install package:</p>
       <div className="mb-4">
         <CodeBlock
-          code="npm i next-app-session"
+          code="npm i next-server-state"
           language="bash"
           showLineNumbers={false}
         />
