@@ -9,9 +9,9 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import { createServerStateProvider } from './server/createServerStateProvider';
-import { ClientContext } from './client/context';
-import { serverStateSession } from './server/session';
+import { createServerStateProvider } from './server/createServerStateProvider.js';
+import { ClientContext } from './client/context.js';
+import { serverStateSession } from './server/session.js';
 export function createServerState(uniqueKey, defaultValues, options) {
     if (options === void 0) { options = {}; }
     var session = serverStateSession(options.sessionOptions);
