@@ -1,3 +1,3 @@
-import { setupServerStateRoutes } from '../../../../src/index';
+import { setupServerStateRoutes } from 'next-server-state';
 
 export default setupServerStateRoutes({});
