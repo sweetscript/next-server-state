@@ -34,7 +34,7 @@ const NavBar = () => {
         >
           <span className="text-base">next-server-state</span>
           <span className="ml-2 rounded-full bg-slate-100 px-2 py-0.5 font-mono text-xs font-medium dark:bg-slate-700">
-            v1.0.0
+            v1.0.3
           </span>
         </div>
         <span className="mx-5 hidden h-8 w-px shrink-0 bg-slate-200 dark:bg-slate-700 md:inline-block"></span>
