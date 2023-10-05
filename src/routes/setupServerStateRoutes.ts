@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { serverStateSession } from '../server/session.js';
+import { serverStateSession } from '../server/session';
 import { ServerStateRoutesOptions } from '../types';
 
 export function setupServerStateRoutes(options?: ServerStateRoutesOptions) {
