@@ -1,7 +1,7 @@
-import { CreateServerState, Obj, ServerStateOptions } from './types.js';
-import { createServerStateProvider } from './server/createServerStateProvider.js';
-import { ClientContext } from './client/context.js';
-import { serverStateSession } from './server/session.js';
+import { CreateServerState, Obj, ServerStateOptions } from './types';
+import { createServerStateProvider } from './server/createServerStateProvider';
+import { ClientContext } from './client/context';
+import { serverStateSession } from './server/session';
 
 export function createServerState<T extends Obj>(
   uniqueKey: string,
